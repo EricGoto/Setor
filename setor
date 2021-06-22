@@ -1,0 +1,72 @@
+import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
+import 'dart:async';
+import 'package:geolocator/geolocator.dart';
+
+
+//Criando variáveis
+var geolocator = Geolocator();
+Position lapLocation;
+Position startPosition1, startPosition2, startPosition3, startPosition4;
+int lap = 0, set = 0;
+double distance1, distance2, distance3, distance4;
+var time1, time2;
+var now1, now2;
+
+
+
+
+
+class setor extends StatefulWidget {
+  @override
+  _setorState createState() => _setorState extends State<setor>();
+}
+
+class _setorState extends State<setor> {
+  Timer timer;
+//Atualização dos setores
+  void initState() {
+    super.initState();
+    timer = Timer.periodic(
+        Duration(milliseconds: 1), (Timer t) => setState(() {}));
+  }
+  //Mostra em qual setor o carro está
+    void setor() async {
+
+      distance2 = await geolocator.distanceBetween(
+          startPosition2.latitude, startPosition2.longitude, lapLocation.latitude,
+          lapLocation.longitude);
+      distance3 = await geolocator.distanceBetween(
+          startPosition3.latitude, startPosition3.longitude, lapLocation.latitude,
+          lapLocation.longitude);
+      distance4 = await geolocator.distanceBetween(
+          startPosition4.latitude, startPosition4.longitude, lapLocation.latitude,
+          lapLocation.longitude);
+      time2 = DateTime
+          .now()
+          .difference(now2)
+          .inMilliseconds;
+      if (distance2 < 10 && time2 > 2000) {
+        set++;
+        now2 = DateTime.now();
+      }
+      if (distance3 < 10 && time2 > 2000) {
+        set++;
+        now2 = DateTime.now();
+      }
+      if (distance3 < 10 && time2 > 2000) {
+        set++;
+        now2 = DateTime.now();
+      }
+      if (set > 4) {
+        set = 1;
+      }
+    }
+
+  }
+  }
+
+}
+
+}
+
